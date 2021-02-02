@@ -1,17 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-int	get_line()
-{
-	char	con[10];
-	read(1, con, 10);
 
-	printf("%s\n", con);
-	return (0);
-}
 int main()
 {
-	get_line();
+	static char *tem[4];
+	char *i;
+
+	i = "asas";
+	tem[0] = "qwqw";
+	printf("%s\n", tem[0]);
+
+	tem[0] = i;
+
+	printf("%s", tem[0]);
 	return 0;
 }
 

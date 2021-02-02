@@ -6,23 +6,37 @@
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 18:54:03 by hyospark          #+#    #+#             */
-/*   Updated: 2021/02/02 23:40:44 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/02/03 03:25:06 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*return_line(char *line, char *cont)
+char	*re_backup(char *cont)
 {
+	int len;
+	int len_c;
 	int i;
-	int j;
+	char *temp;
 
-	i = 0;
-	j = 0;
-	while (cont[j] != '\n' && cont[j])
-		line[i++] = cont[j++];
-	line[j] = '\0';
-	return (line);
+	if (!cont)
+		return (NULL);
+	while (cont[i] && cont[i] != '\n')
+		i++;
+	if (!cont[i])
+	{
+		free(cont);
+		return (0);
+	}
+	len_c = ft_strlen(cont);
+	if (!(temp = malloc(sizeof(char) * (len_c - i) + 1)))
+		return (NULL);
+	i++;
+	while (cont[i])
+		temp[len++] = cont[i++];
+	temp[len] = '\0';
+	free(cont);
+	return (temp);
 }
 
 int		line_check(char *cont)
@@ -47,17 +61,15 @@ int get_next_line(int fd, char **line)
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
 	check = 1;
-	while (!line_check(cont[fd]) && check > 0)
+	while (!line_check(cont[fd]) && check != 0)
 	{
-		check = read(fd, buf, BUFFER_SIZE);
-	}
-	
-	while ()
-	{
-		if (check == -1)
+		if ((check = read(fd, buf, BUFFER_SIZE)) == -1)
 			return (-1);
-		
+		cont[fd] =  ft_strjoin(cont[fd], buf);
 	}
-	first_read(*line, buf);
-	return (0);
+	*line = ft_strdup(cont[fd]);
+	cont[fd] = re_backup(cont[fd]);
+	if (check == 0)
+		return (0);
+	return (1);
 }
