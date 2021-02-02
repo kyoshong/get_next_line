@@ -6,7 +6,7 @@
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 18:54:03 by hyospark          #+#    #+#             */
-/*   Updated: 2021/02/01 22:29:00 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/02/02 23:40:44 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*return_line(char *line, char *cont)
 	return (line);
 }
 
-int		count_newline(char *cont)
+int		line_check(char *cont)
 {
 	int i;
 
@@ -37,19 +37,27 @@ int		count_newline(char *cont)
 	}
 	return (0);
 }
+
 int get_next_line(int fd, char **line)
 {
 	static char	*cont[OPEN_MAX];
 	char		buf[BUFFER_SIZE + 1];
-	int			check;
+	ssize_t		check;
 
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	if ((check = read(fd, buf, BUFFER_SIZE)) == -1)
-		return (-1);
-	while (count_newline(buf))
+	check = 1;
+	while (!line_check(cont[fd]) && check > 0)
 	{
-		
+		check = read(fd, buf, BUFFER_SIZE);
 	}
 	
+	while ()
+	{
+		if (check == -1)
+			return (-1);
+		
+	}
+	first_read(*line, buf);
+	return (0);
 }
