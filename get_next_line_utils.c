@@ -6,34 +6,48 @@
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 19:16:23 by hyospark          #+#    #+#             */
-/*   Updated: 2021/02/03 03:06:19 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/02/04 02:52:08 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*n_str;
 	int		i;
-	char	*str1;
-	char	*str2;
 
 	if (!s1 && !s2)
 		return (NULL);
-	if (!s1)
-		return ((char *)s2);
-	str1 = (char *)s1;
-	str2 = (char *)s2;
-	if (!(n_str = (char *)malloc(ft_strlen(str1) + ft_strlen(str2) + 1)))
-		return (NULL);
 	i = 0;
-	while (*str1 != '\0')
-		n_str[i++] = *str1++;
-	while (*str2 != '\0')
-		n_str[i++] = *str2++;
+	if (!(n_str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
+		return (NULL);
+	while (*s1)
+		n_str[i++] = *s1++;
+	while (*s2)
+		n_str[i++] = *s2++;
 	n_str[i] = '\0';
 	return (n_str);
+}
+
+void		*ft_memmove(void *dst, const void *src, size_t len)
+{
+	char *d;
+	char *s;
+
+	d = (char *)dst;
+	s = (char *)src;
+	if (dst == src)
+		return (dst);
+	if (s < d)
+	{
+		while (len--)
+			*(d + len) = *(s + len);
+		return (dst);
+	}
+	while (len--)
+		*d++ = *s++;
+	return (dst);
 }
 
 char	*ft_strdup(char *s)
@@ -43,12 +57,13 @@ char	*ft_strdup(char *s)
 	int		len;
 
 	if (!s)
-		return (NULL);
-	len = ft_strlen(s);
+		return ("");
+	if ((len = line_check(s)) == 0)
+		return (s);
 	if (!(tem = malloc(sizeof(char) * (len + 1))))
-		return (NULL);
+		return (0);
 	i = 0;
-	while (s[i] && s[i] != '\n')
+	while (i <= len)
 	{
 		tem[i] = s[i];
 		i++;
@@ -57,7 +72,7 @@ char	*ft_strdup(char *s)
 	return (tem);
 }
 
-size_t	ft_strlen(char const *str)
+size_t	ft_strlen(char *str)
 {
 	size_t	i;
 
