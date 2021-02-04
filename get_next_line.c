@@ -6,7 +6,7 @@
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 18:54:03 by hyospark          #+#    #+#             */
-/*   Updated: 2021/02/05 01:24:21 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/02/05 03:45:11 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,16 @@ char	*re_backup(char *cont)
 		return (NULL);
 	len_c = ft_strlen(cont);
 	if (!(temp = malloc(sizeof(char) * (len_c - i) + 1)))
+	{
+		free(cont);
 		return (NULL);
+	}
 	i++;
 	j = 0;
 	while (cont[i])
 		temp[j++] = cont[i++];
 	temp[j] = '\0';
+	free(cont);
 	return (temp);
 }
 
@@ -75,30 +79,6 @@ int get_next_line(int fd, char **line)
 	*line = ft_strdup(cont[fd]);
 	cont[fd] = re_backup(cont[fd]);
 	if (check == 0)
-	{
-		free(cont[fd]);
-		cont[fd] = NULL;
 		return (0);
-	}
 	return (1);
-}
-
-int	main()
-{
-	int		ret;
-	int		fd;
-	char	*line;
-
-//*line이 선언된 상태로 get_next_line 함수로 넘어감
-
-	fd = open("text.txt", O_RDONLY);
-
-	while ((ret = (get_next_line(fd, &line)) > 0))
-	{
-		printf("-------ww---------");
-		//printf("line : %s", line);
-		printf("%d\n", ret);
-	}
-	printf("%d\n", ret);
-		system("leaks a.out > leaks_result; cat leaks_result | grep leaked && rm -rf leaks_result");
 }

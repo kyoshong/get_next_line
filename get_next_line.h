@@ -6,7 +6,7 @@
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 19:16:37 by hyospark          #+#    #+#             */
-/*   Updated: 2021/02/04 03:06:42 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/02/05 03:46:23 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include <stdio.h>
-# include <sys/types.h>
-# include <sys/stat.h> 
-# include <fcntl.h>
 
 int		get_next_line(int fd, char **line);
 char	*re_backup(char *cont);
