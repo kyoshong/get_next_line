@@ -6,7 +6,7 @@
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 19:16:37 by hyospark          #+#    #+#             */
-/*   Updated: 2021/02/04 02:50:41 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/02/04 03:06:42 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ char	*re_backup(char *cont);
 int		line_check(char *cont);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *s);
-int		ft_strlen(char *str);
+size_t	ft_strlen(char *str);
 
 # endif

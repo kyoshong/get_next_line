@@ -6,7 +6,7 @@
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 18:54:03 by hyospark          #+#    #+#             */
-/*   Updated: 2021/02/04 02:37:56 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/02/04 20:43:27 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ char	*re_backup(char *cont)
 	if (!cont)
 		return (NULL);
 	i = 0;
-	while (cont[i] != '\n')
-	{
+	while (cont[i] != '\n' && cont[i])
 		i++;
-		if (!cont[i])
-			return (0);
-	}
+	if (!cont[i])
+		return (0);
 	len_c = ft_strlen(cont);
 	if (!(temp = malloc(sizeof(char) * (len_c - i) + 1)))
 		return (NULL);
@@ -63,41 +61,38 @@ int get_next_line(int fd, char **line)
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
 	check = 1;
-	while (line_check(cont[fd]) == 0 && check > 0)
+	while (line_check(cont[fd]) == 0 && check != 0)
 	{
-		printf("fucking cont : %s\n", cont[fd]);
-		printf("fucking cont : %s\n", cont[fd]);
 		if ((check = read(fd, buf, BUFFER_SIZE)) < 0)
 			return (-1);
-		printf("before cont : %s\n", cont[fd]);
-		printf("check : %zd\n", check);
 		buf[check] = '\0';
-		printf("buf : %s\n", buf);
-		printf("before cont : %s\n", cont[fd]);
+		//printf("buf :%s\n", buf);
+		//printf("before cont :%s\n", cont[fd]);
 		cont[fd] = ft_strjoin(cont[fd], buf);
-		printf("after cont : %s\n", cont[fd]);
+		//printf("after cont :%s\n", cont[fd]);
+		buf[0] = '\0';
 	}
 	*line = ft_strdup(cont[fd]);
-	printf("line : %s\n", *line);
+	//printf("line :%s", *line);
 	cont[fd] = re_backup(cont[fd]);
 	if (check == 0)
 		return (0);
 	return (1);
 }
-int	main()
-{
-	int		ret;
-	int		fd;
-	char	*line;
 
-//*line이 선언된 상태로 get_next_line 함수로 넘어감
+// int	main()
+// {
+// 	int		ret;
+// 	int		fd;
+// 	char	*line;
 
-	fd = open("text.txt", O_RDONLY);
+// //*line이 선언된 상태로 get_next_line 함수로 넘어감
 
-	while ((ret = (get_next_line(fd, &line)) > 0))
-	{
-		printf("-------ww---------");
-		printf("%s", line);
-	}
-	printf("%s", line);
-}
+// 	fd = open("text.txt", O_RDONLY);
+
+// 	while ((ret = (get_next_line(fd, &line)) > 0))
+// 	{
+// 		printf("-------ww---------");
+// 		printf("line : %s", line);
+// 	}
+// }
