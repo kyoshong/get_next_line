@@ -6,7 +6,7 @@
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 18:54:03 by hyospark          #+#    #+#             */
-/*   Updated: 2021/02/05 03:45:11 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/02/05 15:38:32 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*re_backup(char *cont)
 {
-	int len_c;
-	int i;
-	int j;
-	char *temp;
+	int		len_c;
+	int		i;
+	int		j;
+	char	*temp;
 
 	if (!cont)
 		return (NULL);
@@ -43,7 +43,7 @@ char	*re_backup(char *cont)
 
 int		line_check(char *cont)
 {
-	int i;
+	int	i;
 
 	if (!cont)
 		return (0);
@@ -56,7 +56,7 @@ int		line_check(char *cont)
 	return (0);
 }
 
-int get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
 	static char	*cont[OPEN_MAX];
 	char		buf[BUFFER_SIZE + 1];
@@ -66,7 +66,7 @@ int get_next_line(int fd, char **line)
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
 	check = 1;
-	while (!line_check(cont[fd])&& check != 0)
+	while (!line_check(cont[fd]) && check != 0)
 	{
 		if ((check = read(fd, buf, BUFFER_SIZE)) < 0)
 			return (-1);

@@ -6,7 +6,7 @@
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 19:16:23 by hyospark          #+#    #+#             */
-/*   Updated: 2021/02/05 03:47:33 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/02/05 15:40:25 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*n_str;
 	int		i;
-	int 	j;
+	int		j;
 
 	if (!s1 && !s2)
 		return (NULL);
